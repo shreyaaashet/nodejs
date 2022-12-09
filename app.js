@@ -1,7 +1,10 @@
 const express = require("express");
+const morgan = require("morgan");
 
 //express app
 const app=express();
+
+
 
 // register view engine
 app.set('view engine','ejs'); // look for view engine inside ejs in this file as root
@@ -11,8 +14,12 @@ app.set('view engine','ejs'); // look for view engine inside ejs in this file as
 
 // listen for requests( here we writing a response to a get req)
 app.listen(3000);
-//get req listen to that url, inside funct
-// req is info of the req like get or post and res can be used to send res 
+
+// middleware:
+app.use(express.static("public"));// whtever file u want to make accessible to browser
+app.use(morgan('tiny'));
+
+
 app.get('/',(req,res)=>{
 const data=[
   {title:"shreya",description:"skdkdkdk"},
